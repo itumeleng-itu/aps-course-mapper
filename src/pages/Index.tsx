@@ -1,13 +1,13 @@
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { PlusCircle, Calculator, Filter } from 'lucide-react';
+import { PlusCircle, Calculator, Filter, School } from 'lucide-react';
 import SubjectSelect, { Subject } from '@/components/SubjectSelect';
 import CourseCard from '@/components/CourseCard';
 import { southAfricanSubjects } from '@/data/subjects';
 import { southAfricanUniversities, Course, University } from '@/data/universities';
-import { getAPSPoints } from '@/utils/calculations';
-import { useToast } from '@/components/ui/use-toast';
+import { getAPSPoints, meetsSubjectRequirements } from '@/utils/calculations';
+import { useToast } from '@/hooks/use-toast';
 
 const Index = () => {
   const [subjects, setSubjects] = useState<Subject[]>([]);
@@ -43,21 +43,33 @@ const Index = () => {
     try {
       let totalPoints = 0;
       const subjectLevels: Record<string, number> = {};
+      let validSubjectsCount = 0;
 
       subjects.forEach(subject => {
         if (subject.name && subject.percentage) {
+          const points = getAPSPoints(parseInt(subject.percentage));
+          subjectLevels[subject.name] = points;
+          
           // Skip Life Orientation when calculating total APS
           if (subject.name === "Life Orientation") {
-            const points = getAPSPoints(parseInt(subject.percentage));
-            subjectLevels[subject.name] = points;
             return;
           }
           
-          const points = getAPSPoints(parseInt(subject.percentage));
           totalPoints += points;
-          subjectLevels[subject.name] = points;
+          validSubjectsCount++;
         }
       });
+
+      // Ensure we have at least 6 subjects for a valid APS calculation
+      if (validSubjectsCount < 6) {
+        toast({
+          title: "Insufficient subjects",
+          description: "Please enter at least 6 subjects excluding Life Orientation for a valid APS calculation.",
+          variant: "destructive",
+        });
+        setLoading(false);
+        return;
+      }
 
       setApsScore(totalPoints);
       
@@ -70,15 +82,8 @@ const Index = () => {
               return false;
             }
             
-            // Then check if subject requirements are met
-            for (const req of course.subjectRequirements) {
-              const userLevel = subjectLevels[req.subject] || 0;
-              if (userLevel < req.level) {
-                return false;
-              }
-            }
-            
-            return true;
+            // Then check if all subject requirements are met
+            return meetsSubjectRequirements(subjectLevels, course.subjectRequirements);
           })
           .map(course => ({
             ...course,
@@ -113,17 +118,21 @@ const Index = () => {
     }
   };
 
-  const canCalculate = subjects.length >= 2 && 
+  const canCalculate = subjects.length >= 6 && 
     subjects.every(s => s.name && s.percentage) && 
     new Set(selectedSubjects).size === selectedSubjects.length;
 
   return (
     <div className="space-y-8 max-w-4xl mx-auto p-4">
       <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg p-8 shadow-lg">
-        <h1 className="text-3xl font-bold">CourseFinder</h1>
-        <p className="text-blue-100">Find South African university courses you qualify for</p>
+        <div className="flex items-center mb-2">
+          <School className="h-6 w-6 mr-2" />
+          <h1 className="text-3xl font-bold">CourseFinder South Africa</h1>
+        </div>
+        <p className="text-blue-100">Find South African university courses you qualify for based on your NSC results</p>
         
         <div className="bg-white/10 p-6 rounded-lg backdrop-blur-sm mt-6">
+          <h2 className="text-xl font-semibold mb-4">Enter your NSC Subject Results</h2>
           <div className="space-y-4">
             {subjects.map((subject, index) => (
               <SubjectSelect
@@ -155,6 +164,12 @@ const Index = () => {
               Find Courses
             </Button>
           </div>
+          
+          {subjects.length < 6 && (
+            <p className="text-xs text-white/90 mt-3">
+              Add at least 6 subjects excluding Life Orientation for APS calculation
+            </p>
+          )}
         </div>
       </div>
 
@@ -164,12 +179,22 @@ const Index = () => {
             <h2 className="text-2xl font-bold text-gray-800">Your APS Score</h2>
             <div className="text-4xl font-bold text-blue-600">{apsScore}</div>
             <p className="text-gray-500 text-sm mt-2">Note: Life Orientation is not included in the APS total</p>
+            <div className="mt-4 bg-blue-50 rounded p-3 text-sm text-blue-800">
+              <p className="font-medium">How APS is calculated:</p>
+              <p>Each subject is awarded points based on percentage achieved: 80-100% (7 points), 70-79% (6 points), 60-69% (5 points), etc. The best six subjects (excluding Life Orientation) are used for the total APS.</p>
+            </div>
           </div>
 
           <div className="bg-white rounded-lg p-6 shadow-lg border border-gray-200">
-            <h3 className="text-xl font-bold text-gray-800 mb-4">Qualifying Courses</h3>
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-xl font-bold text-gray-800">Qualifying Courses</h3>
+              <Badge variant="outline" className="px-3 py-1 font-medium">
+                {qualifyingCourses.length} Results
+              </Badge>
+            </div>
+            
             {loading ? (
-              <div className="text-center text-gray-500">Finding courses you qualify for...</div>
+              <div className="text-center text-gray-500 p-10">Finding courses you qualify for...</div>
             ) : (
               <div className="grid gap-4 md:grid-cols-2">
                 {qualifyingCourses.length > 0 ? (
@@ -181,6 +206,7 @@ const Index = () => {
                       faculty={course.faculty}
                       duration={course.duration}
                       apsMin={course.apsMin}
+                      subjectRequirements={course.subjectRequirements}
                     />
                   ))
                 ) : (

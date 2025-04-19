@@ -59,15 +59,22 @@ const SubjectSelect: React.FC<SubjectSelectProps> = ({
           ))}
         </SelectContent>
       </Select>
-      <Input
-        type="number"
-        placeholder="%"
-        min="0"
-        max="100"
-        className="w-24 bg-white text-black"
-        value={subject.percentage}
-        onChange={(e) => onPercentageChange(e.target.value)}
-      />
+      <div className="flex flex-col items-center">
+        <Input
+          type="number"
+          placeholder="%"
+          min="0"
+          max="100"
+          className="w-24 bg-white text-black font-medium"
+          value={subject.percentage}
+          onChange={(e) => onPercentageChange(e.target.value)}
+        />
+        {subject.percentage && (
+          <div className="text-xs font-medium text-blue-600 mt-1">
+            {subject.percentage}% - Level {subject.percentage ? getSubjectLevel(parseInt(subject.percentage)) : ''}
+          </div>
+        )}
+      </div>
       <Button
         variant="ghost"
         size="icon"
@@ -78,6 +85,17 @@ const SubjectSelect: React.FC<SubjectSelectProps> = ({
       </Button>
     </div>
   );
+};
+
+// Helper function to convert percentage to NSC level
+const getSubjectLevel = (percentage: number): number => {
+  if (percentage >= 80) return 7;
+  if (percentage >= 70) return 6;
+  if (percentage >= 60) return 5;
+  if (percentage >= 50) return 4;
+  if (percentage >= 40) return 3;
+  if (percentage >= 30) return 2;
+  return 1;
 };
 
 export default SubjectSelect;
