@@ -68,4 +68,4 @@ export const southAfricanSubjects = {
     "Tourism",
     "Agricultural Management Practices"
   ]
-} as const;
+};
