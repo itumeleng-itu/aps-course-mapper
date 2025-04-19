@@ -64,7 +64,7 @@ const SubjectSelect: React.FC<SubjectSelectProps> = ({
         placeholder="%"
         min="0"
         max="100"
-        className="w-24"
+        className="w-24 bg-white text-black"
         value={subject.percentage}
         onChange={(e) => onPercentageChange(e.target.value)}
       />

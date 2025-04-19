@@ -46,6 +46,13 @@ const Index = () => {
 
       subjects.forEach(subject => {
         if (subject.name && subject.percentage) {
+          // Skip Life Orientation when calculating total APS
+          if (subject.name === "Life Orientation") {
+            const points = getAPSPoints(parseInt(subject.percentage));
+            subjectLevels[subject.name] = points;
+            return;
+          }
+          
           const points = getAPSPoints(parseInt(subject.percentage));
           totalPoints += points;
           subjectLevels[subject.name] = points;
@@ -80,6 +87,21 @@ const Index = () => {
       );
       
       setQualifyingCourses(qualifying);
+      
+      if (qualifying.length === 0) {
+        toast({
+          title: "No matching courses found",
+          description: "Try adding more subjects or improving your marks.",
+          variant: "default",
+        });
+      } else {
+        toast({
+          title: `Found ${qualifying.length} matching courses`,
+          description: "Scroll down to see your options.",
+          variant: "default",
+        });
+      }
+      
     } catch (error) {
       toast({
         variant: "destructive",
@@ -141,6 +163,7 @@ const Index = () => {
           <div className="bg-white rounded-lg p-6 shadow-lg border border-gray-200">
             <h2 className="text-2xl font-bold text-gray-800">Your APS Score</h2>
             <div className="text-4xl font-bold text-blue-600">{apsScore}</div>
+            <p className="text-gray-500 text-sm mt-2">Note: Life Orientation is not included in the APS total</p>
           </div>
 
           <div className="bg-white rounded-lg p-6 shadow-lg border border-gray-200">
