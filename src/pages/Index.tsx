@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';  // Add this import
 import { PlusCircle, Calculator, Filter, School } from 'lucide-react';
 import SubjectSelect, { Subject } from '@/components/SubjectSelect';
 import CourseCard from '@/components/CourseCard';
