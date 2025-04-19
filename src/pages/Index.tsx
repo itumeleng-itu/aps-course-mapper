@@ -1,17 +1,18 @@
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { PlusCircle, Calculator } from 'lucide-react';
+import { PlusCircle, Calculator, Filter } from 'lucide-react';
 import SubjectSelect, { Subject } from '@/components/SubjectSelect';
 import CourseCard from '@/components/CourseCard';
 import { southAfricanSubjects } from '@/data/subjects';
+import { southAfricanUniversities, Course, University } from '@/data/universities';
 import { getAPSPoints } from '@/utils/calculations';
 import { useToast } from '@/components/ui/use-toast';
 
 const Index = () => {
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [apsScore, setApsScore] = useState<number | null>(null);
-  const [qualifyingCourses, setQualifyingCourses] = useState<Array<{ degree: string; apsMin: number }>>([]);
+  const [qualifyingCourses, setQualifyingCourses] = useState<Array<Course & { university: string }>>([]);
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
@@ -37,45 +38,53 @@ const Index = () => {
     setSubjects(newSubjects);
   };
 
-  const calculateQualifications = async () => {
+  const calculateQualifications = () => {
     setLoading(true);
     try {
       let totalPoints = 0;
-      let englishLevel = 0;
-      let mathLevel = 0;
+      const subjectLevels: Record<string, number> = {};
 
       subjects.forEach(subject => {
         if (subject.name && subject.percentage) {
           const points = getAPSPoints(parseInt(subject.percentage));
           totalPoints += points;
-
-          if (subject.name.includes('English')) {
-            englishLevel = points;
-          } else if (subject.name === 'Mathematics') {
-            mathLevel = points;
-          }
+          subjectLevels[subject.name] = points;
         }
       });
 
       setApsScore(totalPoints);
-
-      // Simulated API call (replace with actual API call)
-      const response = await fetch('/api/courses');
-      const courses = await response.json();
       
-      // For demo purposes, showing sample courses
-      const sampleCourses = [
-        { degree: "Bachelor of Science in Computer Science", apsMin: 30 },
-        { degree: "Bachelor of Commerce", apsMin: 28 },
-        { degree: "Bachelor of Arts", apsMin: 26 }
-      ];
+      // Find qualifying courses based on APS and subject requirements
+      const qualifying = southAfricanUniversities.flatMap(university => 
+        university.courses
+          .filter(course => {
+            // First check if APS meets the minimum requirement
+            if (totalPoints < course.apsMin) {
+              return false;
+            }
+            
+            // Then check if subject requirements are met
+            for (const req of course.subjectRequirements) {
+              const userLevel = subjectLevels[req.subject] || 0;
+              if (userLevel < req.level) {
+                return false;
+              }
+            }
+            
+            return true;
+          })
+          .map(course => ({
+            ...course,
+            university: university.name
+          }))
+      );
       
-      setQualifyingCourses(sampleCourses.filter(course => totalPoints >= course.apsMin));
+      setQualifyingCourses(qualifying);
     } catch (error) {
       toast({
         variant: "destructive",
         title: "Error",
-        description: "Failed to fetch qualifying courses. Please try again."
+        description: "Failed to calculate qualifying courses. Please try again."
       });
     } finally {
       setLoading(false);
@@ -90,7 +99,7 @@ const Index = () => {
     <div className="space-y-8 max-w-4xl mx-auto p-4">
       <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg p-8 shadow-lg">
         <h1 className="text-3xl font-bold">CourseFinder</h1>
-        <p className="text-blue-100">Browse university courses</p>
+        <p className="text-blue-100">Find South African university courses you qualify for</p>
         
         <div className="bg-white/10 p-6 rounded-lg backdrop-blur-sm mt-6">
           <div className="space-y-4">
@@ -121,7 +130,7 @@ const Index = () => {
               disabled={!canCalculate || loading}
             >
               <Calculator className="mr-2 h-4 w-4" />
-              Courses
+              Find Courses
             </Button>
           </div>
         </div>
@@ -135,9 +144,9 @@ const Index = () => {
           </div>
 
           <div className="bg-white rounded-lg p-6 shadow-lg border border-gray-200">
-            <h3 className="text-xl font-bold text-gray-800 mb-4">Courses</h3>
+            <h3 className="text-xl font-bold text-gray-800 mb-4">Qualifying Courses</h3>
             {loading ? (
-              <div className="text-center text-gray-500">Loading courses...</div>
+              <div className="text-center text-gray-500">Finding courses you qualify for...</div>
             ) : (
               <div className="grid gap-4 md:grid-cols-2">
                 {qualifyingCourses.length > 0 ? (
@@ -145,6 +154,9 @@ const Index = () => {
                     <CourseCard
                       key={index}
                       degree={course.degree}
+                      university={course.university}
+                      faculty={course.faculty}
+                      duration={course.duration}
                       apsMin={course.apsMin}
                     />
                   ))
