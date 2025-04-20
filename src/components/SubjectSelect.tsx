@@ -37,10 +37,10 @@ const SubjectSelect: React.FC<SubjectSelectProps> = ({
   return (
     <div className="flex gap-4 items-center">
       <Select value={subject.name} onValueChange={onSubjectChange}>
-        <SelectTrigger className="flex-1">
+        <SelectTrigger className="flex-1 bg-white text-black">
           <SelectValue placeholder="Select Subject" />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent className="bg-white text-black max-h-[300px] overflow-y-auto z-50">
           {Object.entries(availableSubjects).map(([category, subjects]) => (
             <div key={category}>
               <div className="text-sm font-semibold px-2 py-1.5 text-muted-foreground">
