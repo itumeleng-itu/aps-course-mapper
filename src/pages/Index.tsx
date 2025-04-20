@@ -1,8 +1,9 @@
+
 import React, { useState } from 'react';
 import { Subject } from '@/components/SubjectSelect';
 import { useToast } from '@/hooks/use-toast';
 import { getAPSPoints, meetsSubjectRequirements } from '@/utils/calculations';
-import { southAfricanUniversities } from '@/data/universities';
+import { southAfricanUniversities, Course } from '@/data/universities';
 import CoursesHeader from '@/components/CoursesHeader';
 import SubjectsForm from '@/components/SubjectsForm';
 import APSScoreDisplay from '@/components/APSScoreDisplay';
