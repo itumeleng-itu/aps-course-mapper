@@ -51,6 +51,7 @@ const SubjectSelect: React.FC<SubjectSelectProps> = ({
                   key={subjectName}
                   value={subjectName}
                   disabled={selectedSubjects.includes(subjectName) && subject.name !== subjectName}
+                  className="hover:bg-gray-100"
                 >
                   {subjectName}
                 </SelectItem>

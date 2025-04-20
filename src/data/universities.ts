@@ -1,4 +1,3 @@
-
 export interface Course {
   degree: string;
   faculty: string;
@@ -320,6 +319,239 @@ export const southAfricanUniversities: University[] = [
         ]
       }
     ]
+  },
+  {
+    name: "University of South Africa (UNISA)",
+    courses: [
+      {
+        degree: "Bachelor of Science in Computing",
+        faculty: "Science, Engineering and Technology",
+        duration: 3,
+        apsMin: 26,
+        subjectRequirements: [
+          { subject: "Mathematics", level: 4 }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Nelson Mandela University",
+    courses: [
+      {
+        degree: "Bachelor of Engineering in Mechatronics",
+        faculty: "Engineering",
+        duration: 4,
+        apsMin: 35,
+        subjectRequirements: [
+          { subject: "Mathematics", level: 6 },
+          { subject: "Physical Sciences", level: 5 }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Cape Peninsula University of Technology",
+    courses: [
+      {
+        degree: "National Diploma in Information Technology",
+        faculty: "Informatics and Design",
+        duration: 3,
+        apsMin: 26,
+        subjectRequirements: [
+          { subject: "Mathematics", level: 4 },
+          { subject: "English Home Language", level: 4 }
+        ]
+      }
+    ]
+  },
+  {
+    name: "University of Fort Hare",
+    courses: [
+      {
+        degree: "Bachelor of Social Sciences",
+        faculty: "Social Sciences",
+        duration: 3,
+        apsMin: 26,
+        subjectRequirements: [
+          { subject: "English Home Language", level: 4 }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Tshwane University of Technology",
+    courses: [
+      {
+        degree: "Diploma in Journalism",
+        faculty: "Humanities",
+        duration: 3,
+        apsMin: 24,
+        subjectRequirements: [
+          { subject: "English Home Language", level: 4 }
+        ]
+      }
+    ]
+  },
+  {
+    name: "University of Limpopo",
+    courses: [
+      {
+        degree: "Bachelor of Science in Agriculture",
+        faculty: "Science and Agriculture",
+        duration: 4,
+        apsMin: 26,
+        subjectRequirements: [
+          { subject: "Mathematics", level: 4 },
+          { subject: "Life Sciences", level: 4 }
+        ]
+      }
+    ]
+  },
+  {
+    name: "University of Zululand",
+    courses: [
+      {
+        degree: "Bachelor of Arts",
+        faculty: "Arts",
+        duration: 3,
+        apsMin: 26,
+        subjectRequirements: [
+          { subject: "English Home Language", level: 4 }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Durban University of Technology",
+    courses: [
+      {
+        degree: "National Diploma in Graphic Design",
+        faculty: "Arts and Design",
+        duration: 3,
+        apsMin: 25,
+        subjectRequirements: [
+          { subject: "English Home Language", level: 4 }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Vaal University of Technology",
+    courses: [
+      {
+        degree: "Diploma in Tourism Management",
+        faculty: "Human Sciences",
+        duration: 3,
+        apsMin: 23,
+        subjectRequirements: [
+          { subject: "English Home Language", level: 3 }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Central University of Technology",
+    courses: [
+      {
+        degree: "National Diploma in Engineering",
+        faculty: "Engineering and Information Technology",
+        duration: 3,
+        apsMin: 27,
+        subjectRequirements: [
+          { subject: "Mathematics", level: 4 },
+          { subject: "Physical Sciences", level: 4 }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Walter Sisulu University",
+    courses: [
+      {
+        degree: "Bachelor of Science in Nursing",
+        faculty: "Health Sciences",
+        duration: 4,
+        apsMin: 28,
+        subjectRequirements: [
+          { subject: "Mathematics", level: 3 },
+          { subject: "Life Sciences", level: 4 }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Sefako Makgatho Health Sciences University",
+    courses: [
+      {
+        degree: "Bachelor of Dental Surgery",
+        faculty: "Dentistry",
+        duration: 5,
+        apsMin: 35,
+        subjectRequirements: [
+          { subject: "Mathematics", level: 5 },
+          { subject: "Physical Sciences", level: 5 },
+          { subject: "Life Sciences", level: 5 }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Sol Plaatje University",
+    courses: [
+      {
+        degree: "Bachelor of Science in Data Science",
+        faculty: "Natural and Applied Sciences",
+        duration: 3,
+        apsMin: 30,
+        subjectRequirements: [
+          { subject: "Mathematics", level: 5 }
+        ]
+      }
+    ]
+  },
+  {
+    name: "University of Mpumalanga",
+    courses: [
+      {
+        degree: "Bachelor of Agriculture in Agricultural Extension",
+        faculty: "Agriculture",
+        duration: 3,
+        apsMin: 26,
+        subjectRequirements: [
+          { subject: "Mathematics", level: 3 },
+          { subject: "Life Sciences", level: 4 }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Mangosuthu University of Technology",
+    courses: [
+      {
+        degree: "National Diploma in Chemical Engineering",
+        faculty: "Engineering",
+        duration: 3,
+        apsMin: 25,
+        subjectRequirements: [
+          { subject: "Mathematics", level: 4 },
+          { subject: "Physical Sciences", level: 4 }
+        ]
+      }
+    ]
+  },
+  {
+    name: "University of Venda",
+    courses: [
+      {
+        degree: "Bachelor of Environmental Sciences",
+        faculty: "Science, Engineering and Technology",
+        duration: 3,
+        apsMin: 26,
+        subjectRequirements: [
+          { subject: "Mathematics", level: 3 },
+          { subject: "Life Sciences", level: 4 }
+        ]
+      }
+    ]
   }
-  // More universities can be added here
 ];
