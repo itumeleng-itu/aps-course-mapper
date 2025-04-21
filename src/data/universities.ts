@@ -1,3 +1,4 @@
+
 export interface Course {
   degree: string;
   faculty: string;
@@ -1005,4 +1006,80 @@ export const southAfricanUniversities: University[] = [
       {
         degree: "Diploma in Journalism",
         faculty: "Humanities",
-        duration: 3
+        duration: 3,
+        apsMin: 24,
+        subjectRequirements: [
+          { subject: "English", level: 4 }
+        ]
+      },
+      {
+        degree: "Diploma in Language Practice",
+        faculty: "Humanities",
+        duration: 3,
+        apsMin: 20,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Another Official Language", level: 4 }
+        ]
+      },
+      {
+        degree: "Diploma in Law",
+        faculty: "Humanities",
+        duration: 3,
+        apsMin: 20,
+        subjectRequirements: [
+          { subject: "English", level: 4 }
+        ]
+      },
+      {
+        degree: "Diploma in Legal Support",
+        faculty: "Humanities",
+        duration: 3,
+        apsMin: 20,
+        subjectRequirements: [
+          { subject: "English", level: 4 }
+        ]
+      },
+      {
+        degree: "Diploma in Policing",
+        faculty: "Humanities",
+        duration: 3,
+        apsMin: 20,
+        subjectRequirements: [
+          { subject: "English", level: 3 },
+          { subject: "Mathematics/Technical Mathematics/Mathematics Literacy", level: 3 }
+        ]
+      },
+      {
+        degree: "Diploma in Public Affairs(Admin of State)",
+        faculty: "Humanities",
+        duration: 3,
+        apsMin: 20,
+        subjectRequirements: [
+          { subject: "English", level: 3 },
+          { subject: "Mathematics/Mathematical Literacy", level: 3 }
+        ]
+      },
+      {
+        degree: "Diploma in Public Affairs(Local Government)",
+        faculty: "Humanities",
+        duration: 3,
+        apsMin: 20,
+        subjectRequirements: [
+          { subject: "English", level: 3 },
+          { subject: "Mathematics/Mathematical Literacy", level: 3 }
+        ]
+      },
+      {
+        degree: "Diploma in Traffic Safety and Municipal Police Management",
+        faculty: "Humanities",
+        duration: 3,
+        apsMin: 20,
+        subjectRequirements: [
+          { subject: "English", level: 3 },
+          { subject: "Mathematics/Technical Mathematics/Mathematical Literacy", level: 3 }
+        ]
+      }
+    ]
+  }
+]
