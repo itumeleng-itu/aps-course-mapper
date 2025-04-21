@@ -805,169 +805,204 @@ export const southAfricanUniversities: University[] = [
           { subject: "Mathematics/Technical Mathematics", level: 4 },
           { subject: "Physical Sciences/Technical Sciences", level: 3 }
         ]
-      }
-    ]
-  },
-  {
-    name: "University of Limpopo",
-    courses: [
+      },
       {
-        degree: "Bachelor of Science in Agriculture",
-        faculty: "Science and Agriculture",
+        degree: "Bachelor of Education (Foundation Phase Teaching)",
+        faculty: "Humanities",
         duration: 4,
-        apsMin: 26,
-        subjectRequirements: [
-          { subject: "Mathematics", level: 4 },
-          { subject: "Life Sciences", level: 4 }
-        ]
-      }
-    ]
-  },
-  {
-    name: "University of Zululand",
-    courses: [
-      {
-        degree: "Bachelor of Arts",
-        faculty: "Arts",
-        duration: 3,
-        apsMin: 26,
-        subjectRequirements: [
-          { subject: "English Home Language", level: 4 }
-        ]
-      }
-    ]
-  },
-  {
-    name: "Durban University of Technology",
-    courses: [
-      {
-        degree: "National Diploma in Graphic Design",
-        faculty: "Arts and Design",
-        duration: 3,
         apsMin: 25,
         subjectRequirements: [
-          { subject: "English Home Language", level: 4 }
-        ]
-      }
-    ]
-  },
-  {
-    name: "Vaal University of Technology",
-    courses: [
-      {
-        degree: "Diploma in Tourism Management",
-        faculty: "Human Sciences",
-        duration: 3,
-        apsMin: 23,
-        subjectRequirements: [
-          { subject: "English Home Language", level: 3 }
-        ]
-      }
-    ]
-  },
-  {
-    name: "Central University of Technology",
-    courses: [
-      {
-        degree: "National Diploma in Engineering",
-        faculty: "Engineering and Information Technology",
-        duration: 3,
-        apsMin: 27,
-        subjectRequirements: [
+          { subject: "Home Language", level: 5 },
+          { subject: "First Additional Language", level: 4 },
           { subject: "Mathematics", level: 4 },
-          { subject: "Physical Sciences", level: 4 }
+          { subject: "Mathematical Literacy", level: 5 }
         ]
-      }
-    ]
-  },
-  {
-    name: "Walter Sisulu University",
-    courses: [
+      },
       {
-        degree: "Bachelor of Science in Nursing",
-        faculty: "Health Sciences",
+        degree: "Bachelor of Education (Intermediate Phase Teaching)",
+        faculty: "Humanities",
         duration: 4,
-        apsMin: 28,
-        subjectRequirements: [
-          { subject: "Mathematics", level: 3 },
-          { subject: "Life Sciences", level: 4 }
-        ]
-      }
-    ]
-  },
-  {
-    name: "Sefako Makgatho Health Sciences University",
-    courses: [
-      {
-        degree: "Bachelor of Dental Surgery",
-        faculty: "Dentistry",
-        duration: 5,
-        apsMin: 35,
-        subjectRequirements: [
-          { subject: "Mathematics", level: 5 },
-          { subject: "Physical Sciences", level: 5 },
-          { subject: "Life Sciences", level: 5 }
-        ]
-      }
-    ]
-  },
-  {
-    name: "Sol Plaatje University",
-    courses: [
-      {
-        degree: "Bachelor of Science in Data Science",
-        faculty: "Natural and Applied Sciences",
-        duration: 3,
-        apsMin: 30,
-        subjectRequirements: [
-          { subject: "Mathematics", level: 5 }
-        ]
-      }
-    ]
-  },
-  {
-    name: "University of Mpumalanga",
-    courses: [
-      {
-        degree: "Bachelor of Agriculture in Agricultural Extension",
-        faculty: "Agriculture",
-        duration: 3,
-        apsMin: 26,
-        subjectRequirements: [
-          { subject: "Mathematics", level: 3 },
-          { subject: "Life Sciences", level: 4 }
-        ]
-      }
-    ]
-  },
-  {
-    name: "Mangosuthu University of Technology",
-    courses: [
-      {
-        degree: "National Diploma in Chemical Engineering",
-        faculty: "Engineering",
-        duration: 3,
         apsMin: 25,
         subjectRequirements: [
+          { subject: "Home Language", level: 4 },
+          { subject: "First Additional Language", level: 4 },
           { subject: "Mathematics", level: 4 },
-          { subject: "Physical Sciences", level: 4 }
+          { subject: "Mathematical Literacy", level: 5 }
         ]
-      }
-    ]
-  },
-  {
-    name: "University of Venda",
-    courses: [
+      },
       {
-        degree: "Bachelor of Environmental Sciences",
-        faculty: "Science, Engineering and Technology",
-        duration: 3,
-        apsMin: 26,
+        degree: "Bachelor of Education (Senior Phase and Further Education and Training Teaching) (Specialisation in Agriculture)",
+        faculty: "Humanities",
+        duration: 4,
+        apsMin: 24,
         subjectRequirements: [
-          { subject: "Mathematics", level: 3 },
+          { subject: "English", level: 4 },
+          { subject: "Mathematics/Technical Mathematics/Mathematical Literacy", level: 4 },
+          { subject: "Agricultural Sciences/Life Sciences/Physical Sciences/Technical Sciences", level: 4 }
+        ]
+      },
+      {
+        degree: "Bachelor of Education (Senior Phase and Further Education and Training Teaching) (Specialisation in Consumer Sciences)",
+        faculty: "Humanities",
+        duration: 4,
+        apsMin: 24,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics/Technical Mathematics/Mathematical Literacy", level: 4 },
+          { subject: "Consumer Studies/Hospitality Studies/Tourism", level: 4 }
+        ]
+      },
+      {
+        degree: "Bachelor of Education (Senior Phase and Further Education and Training Teaching) (Specialisation in Economic and Management Sciences)",
+        faculty: "Humanities",
+        duration: 4,
+        apsMin: 24,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics/Technical Mathematics/Mathematical Literacy", level: 4 },
+          { subject: "Accounting/Business Studies/Economics", level: 4 }
+        ]
+      },
+      {
+        degree: "Bachelor of Education (Senior Phase and Further Education and Training Teaching) (Specialisation in Information Technology)",
+        faculty: "Humanities",
+        duration: 4,
+        apsMin: 24,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics/Technical Mathematics/Information Technology", level: 4 }
+        ]
+      },
+      {
+        degree: "Bachelor of Education (Senior Phase and Further Education and Training Teaching) (Specialisation in Mathematics)",
+        faculty: "Humanities",
+        duration: 4,
+        apsMin: 24,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics", level: 4 },
+          { subject: "Life Sciences/Physical Sciences", level: 4 }
+        ]
+      },
+      {
+        degree: "Bachelor of Education (Senior Phase and Further Education and Training Teaching) (Specialisation in Physical Education)",
+        faculty: "Humanities",
+        duration: 4,
+        apsMin: 24,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics/Technical Mathematics/Mathematics Literacy", level: 4 },
           { subject: "Life Sciences", level: 4 }
         ]
-      }
-    ]
-  }
-];
+      },
+      {
+        degree: "Bachelor of Education (Senior Phase and Further Education and Training Teaching) (Specialisation in Sciences)",
+        faculty: "Humanities",
+        duration: 4,
+        apsMin: 24,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics", level: 4 },
+          { subject: "Life Sciences/Physical Sciences", level: 4 }
+        ]
+      },
+      {
+        degree: "Bachelor of Education (Senior Phase and Further Education and Training Teaching) (Specialisation in Technology)",
+        faculty: "Humanities",
+        duration: 4,
+        apsMin: 24,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics/Technical Mathematics", level: 4 },
+          { subject: "Civil Technology/Electrical Technology/Mechanical Technology/Engineering Graphics and Design/Physical Sciences", level: 4 }
+        ]
+      },
+      {
+        degree: "Diploma in Adult and Community Education and Training (Agriculture)",
+        faculty: "Humanities",
+        duration: 3,
+        apsMin: 22,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics/Technical Mathematics", level: 3 },
+          { subject: "Agricultural Management Practice/Agricultural Sciences/Life Sciences/Agricultural Technology/Physical Sciences/Technical Sciences", level: 3 }
+        ]
+      },
+      {
+        degree: "Diploma in Adult and Community Education and Training (Civil Technology)",
+        faculty: "Humanities",
+        duration: 3,
+        apsMin: 22,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Engineering Graphics and Design/Mathematics/Technical Mathematics", level: 3 },
+          { subject: "Civil Technology/Physical Sciences/Technical Sciences", level: 3 }
+        ]
+      },
+      {
+        degree: "Diploma in Adult and Community Education and Training (Consumer Sciences)",
+        faculty: "Humanities",
+        duration: 3,
+        apsMin: 22,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics/Technical Mathematics/Mathematical Literacy", level: 3 }
+        ]
+      },
+      {
+        degree: "Diploma in Adult and Community Education and Training (Economics and Management)",
+        faculty: "Humanities",
+        duration: 3,
+        apsMin: 22,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics/Technical Mathematics/Mathematical Literacy", level: 3 },
+          { subject: "Accounting/Business Studies", level: 3 }
+        ]
+      },
+      {
+        degree: "Diploma in Adult and Community Education and Training (Electrical and Mechanical)",
+        faculty: "Humanities",
+        duration: 3,
+        apsMin: 22,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics/Technical Mathematics", level: 3 },
+          { subject: "Physical Sciences/Technical Sciences", level: 3 }
+        ]
+      },
+      {
+        degree: "Diploma in Adult and Community Education and Training (Languages)",
+        faculty: "Humanities",
+        duration: 3,
+        apsMin: 22,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Another Official Language", level: 4 }
+        ]
+      },
+      {
+        degree: "Diploma in Correctional and Rehabilitation Studies",
+        faculty: "Humanities",
+        duration: 3,
+        apsMin: 20,
+        subjectRequirements: [
+          { subject: "English", level: 3 },
+          { subject: "Mathematics/Mathematics Literacy", level: 3 }
+        ]
+      },
+      {
+        degree: "Diploma in Integrated Communication",
+        faculty: "Humanities",
+        duration: 3,
+        apsMin: 20,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics Literacy", level: 4 },
+          { subject: "Mathematics/Technical Mathematics/Engineering Mathematics N3", level: 3 }
+        ]
+      },
+      {
+        degree: "Diploma in Journalism",
+        faculty: "Humanities",
+        duration: 3
