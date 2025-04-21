@@ -37,13 +37,22 @@ const SubjectSelect: React.FC<SubjectSelectProps> = ({
   return (
     <div className="flex gap-4 items-center">
       <Select value={subject.name} onValueChange={onSubjectChange}>
-        <SelectTrigger className="flex-1 bg-white text-black">
+        <SelectTrigger className="flex-1 bg-white text-black z-[51]">
           <SelectValue placeholder="Select Subject" />
         </SelectTrigger>
-        <SelectContent className="bg-white text-black max-h-[300px] overflow-y-auto z-50">
+        {/* 
+          The z-50 is generally sufficient, but using fixed position for Content, and 
+          a max-h with overflow-y ensures it's always visible in scrollable parents.
+         */}
+        <SelectContent
+          className="bg-white text-black max-h-[300px] overflow-y-auto fixed left-0 right-0 mx-auto z-[9999] w-[90vw] max-w-md border border-gray-200 shadow-2xl"
+          style={{
+            top: '90px'
+          }}
+        >
           {Object.entries(availableSubjects).map(([category, subjects]) => (
             <div key={category}>
-              <div className="text-sm font-semibold px-2 py-1.5 text-muted-foreground">
+              <div className="text-sm font-semibold px-2 py-1.5 text-muted-foreground sticky top-0 bg-white z-10">
                 {category}
               </div>
               {subjects.map((subjectName) => (
@@ -100,3 +109,4 @@ const getSubjectLevel = (percentage: number): number => {
 };
 
 export default SubjectSelect;
+
