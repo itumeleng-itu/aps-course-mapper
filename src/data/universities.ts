@@ -389,6 +389,208 @@ export const southAfricanUniversities: University[] = [
         subjectRequirements: [
           { subject: "English Home Language", level: 4 }
         ]
+      },
+      {
+        degree: "Diploma in Commercial Photography",
+        faculty: "Arts and Design",
+        duration: 3,
+        apsMin: 22,
+        subjectRequirements: [
+          { subject: "English", level: 3 }
+        ]
+      },
+      {
+        degree: "Diploma in Fashion Design and Technology",
+        faculty: "Arts and Design",
+        duration: 3,
+        apsMin: 20,
+        subjectRequirements: [
+          { subject: "English", level: 3 }
+        ]
+      },
+      {
+        degree: "Diploma in Fine and Applied Arts",
+        faculty: "Arts and Design",
+        duration: 3,
+        apsMin: 20,
+        subjectRequirements: [
+          { subject: "English", level: 3 }
+        ]
+      },
+      {
+        degree: "Diploma in Integrated Communication Design",
+        faculty: "Arts and Design",
+        duration: 3,
+        apsMin: 24,
+        subjectRequirements: [
+          { subject: "English", level: 4 }
+        ]
+      },
+      {
+        degree: "Diploma in Interior Design",
+        faculty: "Arts and Design",
+        duration: 3,
+        apsMin: 22,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Civil Technology", level: 3 },
+          { subject: "Engineering Graphics and Design", level: 3 },
+          { subject: "Visual Arts", level: 3 }
+        ]
+      },
+      {
+        degree: "Diploma in Jewellery Design and Manufacture",
+        faculty: "Arts and Design",
+        duration: 3,
+        apsMin: 20,
+        subjectRequirements: [
+          { subject: "English", level: 3 }
+        ]
+      },
+      {
+        degree: "Diploma in Motion Picture Production",
+        faculty: "Arts and Design",
+        duration: 3,
+        apsMin: 22,
+        subjectRequirements: [
+          { subject: "English", level: 4 }
+        ]
+      },
+      {
+        degree: "Diploma in Performing Arts (Dance)",
+        faculty: "Arts and Design",
+        duration: 3,
+        apsMin: 20,
+        subjectRequirements: [
+          { subject: "English", level: 4 }
+        ]
+      },
+      {
+        degree: "Diploma in Performing Arts (Jazz Music)",
+        faculty: "Arts and Design",
+        duration: 3,
+        apsMin: 20,
+        subjectRequirements: [
+          { subject: "English", level: 4 }
+        ]
+      },
+      {
+        degree: "Diploma in Performing Arts (Opera)",
+        faculty: "Arts and Design",
+        duration: 3,
+        apsMin: 20,
+        subjectRequirements: [
+          { subject: "English", level: 4 }
+        ]
+      },
+      {
+        degree: "Diploma in Performing Arts (Technical Theatre and Design)",
+        faculty: "Arts and Design",
+        duration: 3,
+        apsMin: 20,
+        subjectRequirements: [
+          { subject: "English", level: 4 }
+        ]
+      },
+      {
+        degree: "Diploma in Performing Arts (Technical Theatre and Perfomance)",
+        faculty: "Arts and Design",
+        duration: 3,
+        apsMin: 20,
+        subjectRequirements: [
+          { subject: "English", level: 4 }
+        ]
+      },
+      {
+        degree: "Higher Certificate in Music",
+        faculty: "Arts and Design",
+        duration: 3,
+        apsMin: 18,
+        subjectRequirements: [
+          { subject: "English", level: 3 }
+        ]
+      },
+      {
+        degree: "Diploma in Accounting",
+        faculty: "Economics and Finance",
+        duration: 3,
+        apsMin: 22,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Accounting", level: 5 },
+          { subject: "Mathematics/Technical Mathematics", level: 3 },
+          { subject: "Mathematical Literacy", level: 5 }
+        ]
+      },
+      {
+        degree: "Diploma in Economics",
+        faculty: "Economics and Finance",
+        duration: 3,
+        apsMin: 22,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics/Technical Mathematics", level: 3 },
+          { subject: "Mathematical Literacy", level: 6 }
+        ]
+      },
+      {
+        degree: "Diploma in Financial Management",
+        faculty: "Economics and Finance",
+        duration: 3,
+        apsMin: 22,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Accounting", level: 3 },
+          { subject: "Mathematics/Technical Mathematics", level: 3 },
+          { subject: "Mathematical Literacy", level: 5 }
+        ]
+      },
+      {
+        degree: "Diploma in Financial Planning",
+        faculty: "Economics and Finance",
+        duration: 3,
+        apsMin: 22,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Accounting", level: 3 },
+          { subject: "Mathematics/Technical Mathematics", level: 3 },
+          { subject: "Mathematical Literacy", level: 5 }
+        ]
+      },
+      {
+        degree: "Diploma in Internal Auditing",
+        faculty: "Economics and Finance",
+        duration: 3,
+        apsMin: 22,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Accounting", level: 3 },
+          { subject: "Mathematics/Technical Mathematics", level: 3 },
+          { subject: "Mathematical Literacy", level: 5 }
+        ]
+      },
+      {
+        degree: "Diploma in Public Finance",
+        faculty: "Economics and Finance",
+        duration: 3,
+        apsMin: 22,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Accounting", level: 4 },
+          { subject: "Mathematics/Technical Mathematics", level: 3 },
+          { subject: "Mathematical Literacy", level: 5 }
+        ]
+      },
+      {
+        degree: "Higher Certificate in Accounting",
+        faculty: "Economics and Finance",
+        duration: 1,
+        apsMin: 22,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics/Technical Mathematics", level: 3 },
+          { subject: "Mathematical Literacy", level: 4 }
+        ]
       }
     ]
   },
