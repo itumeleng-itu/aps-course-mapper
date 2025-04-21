@@ -591,6 +591,220 @@ export const southAfricanUniversities: University[] = [
           { subject: "Mathematics/Technical Mathematics", level: 3 },
           { subject: "Mathematical Literacy", level: 4 }
         ]
+      },
+      {
+        degree: "Bachelor of Architecture",
+        faculty: "Engineering and the Built Environment",
+        duration: 4,
+        apsMin: 25,
+        subjectRequirements: [
+          { subject: "English", level: 4 }
+        ]
+      },
+      {
+        degree: "Bachelor of Architecture(Extended)",
+        faculty: "Engineering and the Built Environment",
+        duration: 5,
+        apsMin: 25,
+        subjectRequirements: [
+          { subject: "English", level: 4 }
+        ]
+      },
+      {
+        degree: "Bachelor of Geomatics",
+        faculty: "Engineering and the Built Environment",
+        duration: 3,
+        apsMin: 25,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics/Technical Mathematics", level: 5 },
+          { subject: "Physical Sciences/Technical Sciences", level: 4 }
+        ]
+      },
+      {
+        degree: "Bachelor of Engineering Technology (Chemical Engineering)",
+        faculty: "Engineering and the Built Environment",
+        duration: 3,
+        apsMin: 28,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics/Technical Mathematics", level: 5 },
+          { subject: "Physical Sciences/Technical Sciences", level: 5 }
+        ]
+      },
+      {
+        degree: "Bachelor of Engineering Technology (Civil Engineering)",
+        faculty: "Engineering and the Built Environment",
+        duration: 3,
+        apsMin: 28,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics/Technical Mathematics", level: 5 },
+          { subject: "Physical Sciences/Technical Sciences", level: 5 }
+        ]
+      },
+      {
+        degree: "Bachelor of Engineering Technology (Electrical Engineering)",
+        faculty: "Engineering and the Built Environment",
+        duration: 3,
+        apsMin: 30,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics/Technical Mathematics", level: 5 },
+          { subject: "Physical Sciences/Technical Sciences", level: 5 }
+        ]
+      },
+      {
+        degree: "Bachelor of Engineering Technology (Industrial Engineering)",
+        faculty: "Engineering and the Built Environment",
+        duration: 3,
+        apsMin: 28,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics/Technical Mathematics", level: 5 },
+          { subject: "Physical Sciences/Technical Sciences", level: 5 }
+        ]
+      },
+      {
+        degree: "Bachelor of Engineering Technology (Materials Engineering)",
+        faculty: "Engineering and the Built Environment",
+        duration: 3,
+        apsMin: 28,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics/Technical Mathematics", level: 5 },
+          { subject: "Physical Sciences/Technical Sciences", level: 5 }
+        ]
+      },
+      {
+        degree: "Bachelor of Engineering Technology (Mechanical Engineering)",
+        faculty: "Engineering and the Built Environment",
+        duration: 3,
+        apsMin: 28,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics/Technical Mathematics", level: 5 },
+          { subject: "Physical Sciences/Technical Sciences", level: 5 }
+        ]
+      },
+      {
+        degree: "Bachelor of Engineering Technology (Mechatronics Engineering)",
+        faculty: "Engineering and the Built Environment",
+        duration: 3,
+        apsMin: 28,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics/Technical Mathematics", level: 5 },
+          { subject: "Physical Sciences/Technical Sciences", level: 5 }
+        ]
+      },
+      {
+        degree: "Bachelor of Engineering Technology (Metallurgical Engineering)",
+        faculty: "Engineering and the Built Environment",
+        duration: 3,
+        apsMin: 28,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics/Technical Mathematics", level: 5 },
+          { subject: "Physical Sciences/Technical Sciences", level: 5 }
+        ]
+      },
+      {
+        degree: "Diploma in Building Science",
+        faculty: "Engineering and the Built Environment",
+        duration: 3,
+        apsMin: 26,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics/Technical Mathematics", level: 3 },
+          { subject: "Physical Sciences/Technical Sciences", level: 3 }
+        ]
+      },
+      {
+        degree: "Diploma in Electrical Engineering",
+        faculty: "Engineering and the Built Environment",
+        duration: 3,
+        apsMin: 26,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics/Technical Mathematics", level: 4 },
+          { subject: "Physical Sciences/Technical Sciences", level: 4 }
+        ]
+      },
+      {
+        degree: "Diploma in Geomatics",
+        faculty: "Engineering and the Built Environment",
+        duration: 3,
+        apsMin: 23,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics/Technical Mathematics", level: 4 },
+          { subject: "Physical Sciences/Technical Sciences", level: 3 }
+        ]
+      },
+      {
+        degree: "Diploma in Industrial Design",
+        faculty: "Engineering and the Built Environment",
+        duration: 3,
+        apsMin: 21,
+        subjectRequirements: [
+          { subject: "English", level: 4 }
+        ]
+      },
+      {
+        degree: "Higer Certificate in Construction Engineering: Material Test",
+        faculty: "Engineering and the Built Environment",
+        duration: 1,
+        apsMin: 20,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics/Technical Mathematics", level: 4 },
+          { subject: "Physical Sciences/Technical Sciences", level: 3 }
+        ]
+      },
+      {
+        degree: "Higer Certificate in Construction Engineering: Water and Waste",
+        faculty: "Engineering and the Built Environment",
+        duration: 1,
+        apsMin: 20,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics/Technical Mathematics", level: 4 },
+          { subject: "Physical Sciences/Technical Sciences", level: 3 }
+        ]
+      },
+      {
+        degree: "Higer Certificate in Electrical Engineering",
+        faculty: "Engineering and the Built Environment",
+        duration: 1,
+        apsMin: 20,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics/Technical Mathematics", level: 4 },
+          { subject: "Physical Sciences/Technical Sciences", level: 3 }
+        ]
+      },
+      {
+        degree: "Higer Certificate in Industrial Engineering",
+        faculty: "Engineering and the Built Environment",
+        duration: 1,
+        apsMin: 20,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics/Technical Mathematics", level: 4 },
+          { subject: "Physical Sciences/Technical Sciences", level: 3 }
+        ]
+      },
+      {
+        degree: "Higer Certificate in Mechanical Engineering",
+        faculty: "Engineering and the Built Environment",
+        duration: 1,
+        apsMin: 20,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics/Technical Mathematics", level: 4 },
+          { subject: "Physical Sciences/Technical Sciences", level: 3 }
+        ]
       }
     ]
   },
