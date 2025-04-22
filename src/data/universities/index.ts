@@ -1,6 +1,6 @@
 
 import { University } from '../types/university';
-export { University, Course } from '../types/university';
+export type { University, Course } from '../types/university';
 
 // Import from provinces
 export * from './provinces/western-cape';

@@ -1,4 +1,3 @@
-
 import { University } from '@/data/types/university';
 
 export const wits: University[] = [
@@ -106,5 +105,6 @@ export const up: University[] = [
   }
 ];
 
-// Re-export TUT from the existing file
-export * from './tut';
+// Import TUT data correctly
+import { tut } from '../../../gauteng/tut';
+export { tut };
