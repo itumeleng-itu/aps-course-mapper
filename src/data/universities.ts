@@ -381,15 +381,7 @@ export const southAfricanUniversities: University[] = [
   {
     name: "Tshwane University of Technology",
     courses: [
-      {
-        degree: "Diploma in Journalism",
-        faculty: "Humanities",
-        duration: 3,
-        apsMin: 24,
-        subjectRequirements: [
-          { subject: "English Home Language", level: 4 }
-        ]
-      },
+      // Arts and Design Faculty courses
       {
         degree: "Diploma in Commercial Photography",
         faculty: "Arts and Design",
@@ -510,6 +502,7 @@ export const southAfricanUniversities: University[] = [
           { subject: "English", level: 3 }
         ]
       },
+      // Economics and Finance Faculty courses
       {
         degree: "Diploma in Accounting",
         faculty: "Economics and Finance",
@@ -592,6 +585,7 @@ export const southAfricanUniversities: University[] = [
           { subject: "Mathematical Literacy", level: 4 }
         ]
       },
+      // Engineering and Built Environment Faculty courses
       {
         degree: "Bachelor of Architecture",
         faculty: "Engineering and the Built Environment",
@@ -806,6 +800,7 @@ export const southAfricanUniversities: University[] = [
           { subject: "Physical Sciences/Technical Sciences", level: 3 }
         ]
       },
+      // Humanities Faculty courses
       {
         degree: "Bachelor of Education (Foundation Phase Teaching)",
         faculty: "Humanities",
@@ -1010,187 +1005,3 @@ export const southAfricanUniversities: University[] = [
         subjectRequirements: [
           { subject: "English", level: 4 }
         ]
-      },
-      {
-        degree: "Diploma in Language Practice",
-        faculty: "Humanities",
-        duration: 3,
-        apsMin: 20,
-        subjectRequirements: [
-          { subject: "English", level: 4 },
-          { subject: "Another Official Language", level: 4 }
-        ]
-      },
-      {
-        degree: "Diploma in Law",
-        faculty: "Humanities",
-        duration: 3,
-        apsMin: 20,
-        subjectRequirements: [
-          { subject: "English", level: 4 }
-        ]
-      },
-      {
-        degree: "Diploma in Legal Support",
-        faculty: "Humanities",
-        duration: 3,
-        apsMin: 20,
-        subjectRequirements: [
-          { subject: "English", level: 4 }
-        ]
-      },
-      {
-        degree: "Diploma in Policing",
-        faculty: "Humanities",
-        duration: 3,
-        apsMin: 20,
-        subjectRequirements: [
-          { subject: "English", level: 3 },
-          { subject: "Mathematics/Technical Mathematics/Mathematics Literacy", level: 3 }
-        ]
-      },
-      {
-        degree: "Diploma in Public Affairs(Admin of State)",
-        faculty: "Humanities",
-        duration: 3,
-        apsMin: 20,
-        subjectRequirements: [
-          { subject: "English", level: 3 },
-          { subject: "Mathematics/Mathematical Literacy", level: 3 }
-        ]
-      },
-      {
-        degree: "Diploma in Public Affairs(Local Government)",
-        faculty: "Humanities",
-        duration: 3,
-        apsMin: 20,
-        subjectRequirements: [
-          { subject: "English", level: 3 },
-          { subject: "Mathematics/Mathematical Literacy", level: 3 }
-        ]
-      },
-      {
-        degree: "Diploma in Traffic Safety and Municipal Police Management",
-        faculty: "Humanities",
-        duration: 3,
-        apsMin: 20,
-        subjectRequirements: [
-          { subject: "English", level: 3 },
-          { subject: "Mathematics/Technical Mathematics/Mathematical Literacy", level: 3 }
-        ]
-      },
-      {
-        degree: "Diploma in Computer Science",
-        faculty: "ICT",
-        duration: 3,
-        apsMin: 26,
-        subjectRequirements: [
-          { subject: "English", level: 4 },
-          { subject: "Mathematics/Technical Mathematics", level: 5 },
-          { subject: "Mathematical Literacy", level: 7 }
-        ]
-      },
-      {
-        degree: "Diploma in Computer Science (Extended)",
-        faculty: "ICT",
-        duration: 4,
-        apsMin: 23,
-        subjectRequirements: [
-          { subject: "English", level: 3 },
-          { subject: "Mathematics/Technical Mathematics", level: 4 },
-          { subject: "Mathematical Literacy", level: 6 }
-        ]
-      },
-      {
-        degree: "Diploma in Computer Systems Engineering",
-        faculty: "ICT",
-        duration: 3,
-        apsMin: 26,
-        subjectRequirements: [
-          { subject: "English", level: 4 },
-          { subject: "Mathematics/Technical Mathematics", level: 5 },
-          { subject: "Physical Sciences/Technical Sciences", level: 4 }
-        ]
-      },
-      {
-        degree: "Diploma in Computer Systems Engineering (Extended)",
-        faculty: "ICT",
-        duration: 4,
-        apsMin: 23,
-        subjectRequirements: [
-          { subject: "English", level: 3 },
-          { subject: "Mathematics/Technical Mathematics", level: 4 },
-          { subject: "Physical Sciences/Technical Sciences", level: 3 }
-        ]
-      },
-      {
-        degree: "Diploma in Informatics",
-        faculty: "ICT",
-        duration: 3,
-        apsMin: 26,
-        subjectRequirements: [
-          { subject: "English", level: 4 },
-          { subject: "Mathematics/Technical Mathematics", level: 5 },
-          { subject: "Mathematical Literacy", level: 7 }
-        ]
-      },
-      {
-        degree: "Diploma in Informatics (Extended)",
-        faculty: "ICT",
-        duration: 4,
-        apsMin: 23,
-        subjectRequirements: [
-          { subject: "English", level: 3 },
-          { subject: "Mathematics/Technical Mathematics", level: 4 },
-          { subject: "Mathematical Literacy", level: 6 }
-        ]
-      },
-      {
-        degree: "Diploma in Information Technology",
-        faculty: "ICT",
-        duration: 3,
-        apsMin: 26,
-        subjectRequirements: [
-          { subject: "English", level: 4 },
-          { subject: "Mathematics/Technical Mathematics", level: 5 },
-          { subject: "Physical Sciences/Technical Sciences", level: 3 },
-          { subject: "Mathematical Literacy", level: 7 }
-        ]
-      },
-      {
-        degree: "Diploma in Information Technology (Extended)",
-        faculty: "ICT",
-        duration: 4,
-        apsMin: 23,
-        subjectRequirements: [
-          { subject: "English", level: 3 },
-          { subject: "Mathematics/Technical Mathematics", level: 4 },
-          { subject: "Physical Sciences/Technical Sciences", level: 3 },
-          { subject: "Mathematical Literacy", level: 6 }
-        ]
-      },
-      {
-        degree: "Diploma in Multimedia Computing",
-        faculty: "ICT",
-        duration: 3,
-        apsMin: 26,
-        subjectRequirements: [
-          { subject: "English", level: 4 },
-          { subject: "Mathematics/Technical Mathematics", level: 5 },
-          { subject: "Mathematical Literacy", level: 7 }
-        ]
-      },
-      {
-        degree: "Diploma in Multimedia Computing (Extended)",
-        faculty: "ICT",
-        duration: 4,
-        apsMin: 23,
-        subjectRequirements: [
-          { subject: "English", level: 3 },
-          { subject: "Mathematics/Technical Mathematics", level: 4 },
-          { subject: "Mathematical Literacy", level: 6 }
-        ]
-      }
-    ]
-  }
-]
