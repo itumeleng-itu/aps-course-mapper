@@ -1005,3 +1005,120 @@ export const southAfricanUniversities: University[] = [
         subjectRequirements: [
           { subject: "English", level: 4 }
         ]
+      },
+      // Information and Communication Technology (ICT) Faculty courses
+      {
+        degree: "Diploma in Computer Science",
+        faculty: "ICT",
+        duration: 3,
+        apsMin: 26,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics/Technical Mathematics", level: 5 },
+          { subject: "Mathematical Literacy", level: 7 }
+        ]
+      },
+      {
+        degree: "Diploma in Computer Science (Extended)",
+        faculty: "ICT",
+        duration: 4,
+        apsMin: 23,
+        subjectRequirements: [
+          { subject: "English", level: 3 },
+          { subject: "Mathematics/Technical Mathematics", level: 4 },
+          { subject: "Mathematical Literacy", level: 6 }
+        ]
+      },
+      {
+        degree: "Diploma in Computer Systems Engineering",
+        faculty: "ICT",
+        duration: 3,
+        apsMin: 26,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics/Technical Mathematics", level: 5 },
+          { subject: "Physical Sciences/Technical Sciences", level: 4 }
+        ]
+      },
+      {
+        degree: "Diploma in Computer Systems Engineering (Extended)",
+        faculty: "ICT",
+        duration: 4,
+        apsMin: 23,
+        subjectRequirements: [
+          { subject: "English", level: 3 },
+          { subject: "Mathematics/Technical Mathematics", level: 4 },
+          { subject: "Physical Sciences/Technical Sciences", level: 3 }
+        ]
+      },
+      {
+        degree: "Diploma in Informatics",
+        faculty: "ICT",
+        duration: 3,
+        apsMin: 26,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics/Technical Mathematics", level: 5 },
+          { subject: "Mathematical Literacy", level: 7 }
+        ]
+      },
+      {
+        degree: "Diploma in Informatics (Extended)",
+        faculty: "ICT",
+        duration: 4,
+        apsMin: 23,
+        subjectRequirements: [
+          { subject: "English", level: 3 },
+          { subject: "Mathematics/Technical Mathematics", level: 4 },
+          { subject: "Mathematical Literacy", level: 6 }
+        ]
+      },
+      {
+        degree: "Diploma in Information Technology",
+        faculty: "ICT",
+        duration: 3,
+        apsMin: 26,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics/Technical Mathematics", level: 5 },
+          { subject: "Physical Sciences/Technical Sciences", level: 3 },
+          { subject: "Mathematical Literacy", level: 7 }
+        ]
+      },
+      {
+        degree: "Diploma in Information Technology (Extended)",
+        faculty: "ICT",
+        duration: 4,
+        apsMin: 23,
+        subjectRequirements: [
+          { subject: "English", level: 3 },
+          { subject: "Mathematics/Technical Mathematics", level: 4 },
+          { subject: "Physical Sciences/Technical Sciences", level: 3 },
+          { subject: "Mathematical Literacy", level: 6 }
+        ]
+      },
+      {
+        degree: "Diploma in Multimedia Computing",
+        faculty: "ICT",
+        duration: 3,
+        apsMin: 26,
+        subjectRequirements: [
+          { subject: "English", level: 4 },
+          { subject: "Mathematics/Technical Mathematics", level: 5 },
+          { subject: "Mathematical Literacy", level: 7 }
+        ]
+      },
+      {
+        degree: "Diploma in Multimedia Computing (Extended)",
+        faculty: "ICT",
+        duration: 4,
+        apsMin: 23,
+        subjectRequirements: [
+          { subject: "English", level: 3 },
+          { subject: "Mathematics/Technical Mathematics", level: 4 },
+          { subject: "Mathematical Literacy", level: 6 }
+        ]
+      }
+    ]
+  }
+];
