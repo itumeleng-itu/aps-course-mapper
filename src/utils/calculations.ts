@@ -1,4 +1,3 @@
-
 // Convert percentage to APS points according to South African university standards
 export const getAPSPoints = (percentage: number): number => {
   if (percentage >= 80) return 7; // Level 7: 80-100%
@@ -16,14 +15,51 @@ export const getNSCLevel = (percentage: number): number => {
   return getAPSPoints(percentage);
 };
 
+// Check if any of the alternative subjects meet the requirement
+const meetsSubjectAlternative = (
+  subjectLevels: Record<string, number>,
+  requirement: { subject: string; level: number }
+): boolean => {
+  // Handle the Mathematics/Mathematical Literacy/Technical Mathematics case
+  if (requirement.subject.includes('Mathematics')) {
+    const mathLevel = subjectLevels['Mathematics'] || 0;
+    const mathLitLevel = subjectLevels['Mathematical Literacy'] || 0;
+    const techMathLevel = subjectLevels['Technical Mathematics'] || 0;
+
+    // If the requirement specifically asks for Mathematics
+    if (requirement.subject === 'Mathematics') {
+      return mathLevel >= requirement.level;
+    }
+
+    // If the requirement allows for any type of mathematics
+    if (requirement.subject.includes('/')) {
+      // Check each alternative
+      return (
+        (requirement.subject.includes('Mathematics') && mathLevel >= requirement.level) ||
+        (requirement.subject.includes('Mathematical Literacy') && mathLitLevel >= (requirement.level + 2)) || // Mathematical Literacy typically requires 2 levels higher
+        (requirement.subject.includes('Technical Mathematics') && techMathLevel >= requirement.level)
+      );
+    }
+  }
+
+  // For Physical Sciences/Technical Sciences
+  if (requirement.subject.includes('Physical Sciences')) {
+    const physicsLevel = subjectLevels['Physical Sciences'] || 0;
+    const techScienceLevel = subjectLevels['Technical Sciences'] || 0;
+    return physicsLevel >= requirement.level || techScienceLevel >= requirement.level;
+  }
+
+  // For standard single subject requirements
+  return (subjectLevels[requirement.subject] || 0) >= requirement.level;
+};
+
 // Check if subject requirements are met
 export const meetsSubjectRequirements = (
   subjectLevels: Record<string, number>,
   requirements: { subject: string; level: number }[]
 ): boolean => {
   for (const req of requirements) {
-    const userLevel = subjectLevels[req.subject] || 0;
-    if (userLevel < req.level) {
+    if (!meetsSubjectAlternative(subjectLevels, req)) {
       return false;
     }
   }
