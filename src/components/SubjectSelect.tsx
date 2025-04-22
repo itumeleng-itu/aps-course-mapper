@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useRef } from 'react';
 import { cn } from '@/lib/utils';
 import {
   Select,
@@ -11,6 +11,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 export interface Subject {
   name: string;
@@ -34,39 +35,37 @@ const SubjectSelect: React.FC<SubjectSelectProps> = ({
   onPercentageChange,
   onRemove,
 }) => {
+  const triggerRef = useRef<HTMLButtonElement>(null);
+
   return (
     <div className="flex gap-4 items-center">
       <Select value={subject.name} onValueChange={onSubjectChange}>
-        <SelectTrigger className="flex-1 bg-white text-black z-[51]">
+        <SelectTrigger ref={triggerRef} className="flex-1 bg-white text-black z-[51]">
           <SelectValue placeholder="Select Subject" />
         </SelectTrigger>
-        {/* 
-          The z-50 is generally sufficient, but using fixed position for Content, and 
-          a max-h with overflow-y ensures it's always visible in scrollable parents.
-         */}
         <SelectContent
-          className="bg-white text-black max-h-[300px] overflow-y-auto fixed left-0 right-0 mx-auto z-[9999] w-[90vw] max-w-md border border-gray-200 shadow-2xl"
-          style={{
-            top: '90px'
-          }}
+          className="bg-white text-black w-[var(--radix-select-trigger-width)] max-h-[300px] z-[9999]"
+          position="popper"
         >
-          {Object.entries(availableSubjects).map(([category, subjects]) => (
-            <div key={category}>
-              <div className="text-sm font-semibold px-2 py-1.5 text-muted-foreground sticky top-0 bg-white z-10">
-                {category}
+          <ScrollArea className="h-[300px]">
+            {Object.entries(availableSubjects).map(([category, subjects]) => (
+              <div key={category}>
+                <div className="text-sm font-semibold px-2 py-1.5 text-muted-foreground sticky top-0 bg-white z-10">
+                  {category}
+                </div>
+                {subjects.map((subjectName) => (
+                  <SelectItem
+                    key={subjectName}
+                    value={subjectName}
+                    disabled={selectedSubjects.includes(subjectName) && subject.name !== subjectName}
+                    className="hover:bg-gray-100"
+                  >
+                    {subjectName}
+                  </SelectItem>
+                ))}
               </div>
-              {subjects.map((subjectName) => (
-                <SelectItem
-                  key={subjectName}
-                  value={subjectName}
-                  disabled={selectedSubjects.includes(subjectName) && subject.name !== subjectName}
-                  className="hover:bg-gray-100"
-                >
-                  {subjectName}
-                </SelectItem>
-              ))}
-            </div>
-          ))}
+            ))}
+          </ScrollArea>
         </SelectContent>
       </Select>
       <div className="flex flex-col items-center">
@@ -109,4 +108,3 @@ const getSubjectLevel = (percentage: number): number => {
 };
 
 export default SubjectSelect;
-
