@@ -8,12 +8,22 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/components/ui/use-toast";
 import { calculateAps, getEligibleCourses, sampleCourseRequirements } from "@/utils/aps/calculator";
-import { StudentMarks, SubjectMark, EligibilityResult } from "@/utils/aps/types";
+import { StudentMarks, SubjectMark, EligibilityResult, SubjectType, classifySubject } from "@/utils/aps/types";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Info, Plus, Trash2 } from "lucide-react";
+import { southAfricanSubjects } from "@/data/subjects";
+import { Info, Plus, Trash2, Check, ArrowUp, ArrowDown, HelpCircle } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+
+// Flatten the subjects for the dropdown
+const flattenSubjects = (subjectsObj: Record<string, string[]>) => {
+  let flattened: string[] = [];
+  Object.values(subjectsObj).forEach(subjects => {
+    flattened = [...flattened, ...subjects];
+  });
+  return flattened.sort();
+};
 
 const APSCalculator = () => {
   const { toast } = useToast();
@@ -21,20 +31,17 @@ const APSCalculator = () => {
   const [schoolQuintile, setSchoolQuintile] = useState<number | undefined>(undefined);
   const [subjects, setSubjects] = useState<SubjectMark[]>([
     { name: "Mathematics", percentage: 70 },
-    { name: "English", percentage: 65 },
-    { name: "Physical Science", percentage: 60 },
-    { name: "Life Science", percentage: 65 },
+    { name: "English Home Language", percentage: 65 },
+    { name: "Physical Sciences", percentage: 60 },
+    { name: "Life Sciences", percentage: 65 },
     { name: "Geography", percentage: 75 },
     { name: "History", percentage: 70 },
   ]);
   const [results, setResults] = useState<EligibilityResult[]>([]);
   const [apsScore, setApsScore] = useState<number | null>(null);
 
-  const commonSubjects = [
-    "Mathematics", "English", "Physical Science", "Life Science", "Geography",
-    "History", "Economics", "Business Studies", "Accounting", "Computer Applications Technology",
-    "Information Technology", "Music", "Visual Arts", "Dramatic Arts", "Life Orientation"
-  ];
+  // Combine all subjects from the data model
+  const allSubjects = flattenSubjects(southAfricanSubjects);
 
   const addSubject = () => {
     setSubjects([...subjects, { name: "", percentage: 0 }]);
@@ -54,6 +61,10 @@ const APSCalculator = () => {
       newSubjects[index][field] = Math.min(100, Math.max(0, numValue));
     } else {
       newSubjects[index][field] = value as never;
+      // Automatically classify the subject type when name changes
+      if (field === 'name') {
+        newSubjects[index].type = classifySubject(value as string);
+      }
     }
     setSubjects(newSubjects);
   };
@@ -69,6 +80,20 @@ const APSCalculator = () => {
         variant: "destructive",
         title: "Invalid subjects",
         description: "Please ensure all subjects have names and valid percentages (0-100)",
+      });
+      return;
+    }
+
+    // Check if we have at least 6 valid subjects excluding Life Orientation
+    const validSubjectsCount = subjects.filter(
+      subject => !subject.name.includes("Life Orientation")
+    ).length;
+    
+    if (validSubjectsCount < 6) {
+      toast({
+        variant: "destructive",
+        title: "Insufficient subjects",
+        description: "Please provide at least 6 subjects excluding Life Orientation",
       });
       return;
     }
@@ -116,7 +141,7 @@ const APSCalculator = () => {
                     <SelectTrigger id="university-system">
                       <SelectValue placeholder="Select university" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent position="popper">
                       <SelectItem value="UJ">University of Johannesburg (UJ)</SelectItem>
                       <SelectItem value="UP">University of Pretoria (UP)</SelectItem>
                       <SelectItem value="WITS">University of Witwatersrand (WITS)</SelectItem>
@@ -145,7 +170,7 @@ const APSCalculator = () => {
                     <SelectTrigger id="school-quintile">
                       <SelectValue placeholder="Select quintile (optional)" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent position="popper">
                       <SelectItem value="">Not specified</SelectItem>
                       <SelectItem value="1">Quintile 1</SelectItem>
                       <SelectItem value="2">Quintile 2</SelectItem>
@@ -170,12 +195,24 @@ const APSCalculator = () => {
                           <SelectTrigger id={`subject-name-${index}`}>
                             <SelectValue placeholder="Select subject" />
                           </SelectTrigger>
-                          <SelectContent>
-                            {commonSubjects.map((name) => (
-                              <SelectItem key={name} value={name}>{name}</SelectItem>
+                          <SelectContent position="popper">
+                            {Object.entries(southAfricanSubjects).map(([category, subjects]) => (
+                              <div key={category}>
+                                <SelectItem value={category} disabled className="font-semibold text-primary">
+                                  {category}
+                                </SelectItem>
+                                {subjects.map((name) => (
+                                  <SelectItem key={name} value={name}>{name}</SelectItem>
+                                ))}
+                              </div>
                             ))}
                           </SelectContent>
                         </Select>
+                        {subject.type && (
+                          <div className="text-xs mt-1 text-muted-foreground">
+                            Type: {subject.type}
+                          </div>
+                        )}
                       </div>
                       <div>
                         <Label htmlFor={`subject-percentage-${index}`}>Mark (%)</Label>
@@ -241,6 +278,7 @@ const APSCalculator = () => {
                     <TabsTrigger value="all">All Programs</TabsTrigger>
                     <TabsTrigger value="eligible">Eligible</TabsTrigger>
                     <TabsTrigger value="extended">Extended</TabsTrigger>
+                    <TabsTrigger value="ineligible">Ineligible</TabsTrigger>
                   </TabsList>
                   
                   <ScrollArea className="h-[400px] pr-4">
@@ -275,6 +313,19 @@ const APSCalculator = () => {
                         </div>
                       }
                     </TabsContent>
+
+                    <TabsContent value="ineligible" className="m-0 space-y-4">
+                      {results.filter(r => !r.eligible && !r.extendedProgram).length > 0 ? 
+                        results
+                          .filter(r => !r.eligible && !r.extendedProgram)
+                          .map((result, index) => (
+                            <CourseResultCard key={index} result={result} showSuggestions={true} />
+                          )) : 
+                        <div className="text-center py-8 text-muted-foreground">
+                          All programs are eligible or eligible for extended programs
+                        </div>
+                      }
+                    </TabsContent>
                   </ScrollArea>
                 </Tabs>
               )}
@@ -286,7 +337,14 @@ const APSCalculator = () => {
   );
 };
 
-const CourseResultCard = ({ result }: { result: EligibilityResult }) => {
+interface CourseResultCardProps {
+  result: EligibilityResult;
+  showSuggestions?: boolean;
+}
+
+const CourseResultCard = ({ result, showSuggestions = false }: CourseResultCardProps) => {
+  const [showDetails, setShowDetails] = useState(false);
+  
   return (
     <Card className={result.eligible ? "border-green-500" : result.extendedProgram ? "border-amber-500" : ""}>
       <CardHeader className="pb-2">
@@ -300,14 +358,53 @@ const CourseResultCard = ({ result }: { result: EligibilityResult }) => {
         </div>
         <CardDescription>{result.faculty}</CardDescription>
       </CardHeader>
-      {result.missingRequirements.length > 0 && (
+      
+      {(result.missingRequirements.length > 0 || (showSuggestions && result.improvementSuggestions?.length)) && (
         <CardContent className="pb-4">
-          <div className="text-sm font-medium text-destructive mb-1">Missing Requirements:</div>
-          <div className="text-sm">
-            {result.missingRequirements.map((req, i) => (
-              <div key={i} className="text-muted-foreground">{req}</div>
-            ))}
-          </div>
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            onClick={() => setShowDetails(!showDetails)}
+            className="mb-2 text-xs p-1 h-auto"
+          >
+            {showDetails ? <ArrowUp className="h-3 w-3 mr-1" /> : <ArrowDown className="h-3 w-3 mr-1" />}
+            {showDetails ? "Hide Details" : "Show Details"}
+          </Button>
+          
+          {showDetails && (
+            <div className="space-y-2">
+              {result.missingRequirements.length > 0 && (
+                <div>
+                  <div className="text-sm font-medium text-destructive mb-1">Missing Requirements:</div>
+                  <div className="text-sm space-y-1">
+                    {result.missingRequirements.map((req, i) => (
+                      <div key={i} className="text-muted-foreground flex items-start">
+                        <span className="mr-2">•</span>
+                        <span>{req}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              
+              {showSuggestions && result.improvementSuggestions?.length > 0 && (
+                <div>
+                  <div className="text-sm font-medium text-primary mb-1 mt-2 flex items-center">
+                    <HelpCircle className="h-4 w-4 mr-1" />
+                    Improvement Suggestions:
+                  </div>
+                  <div className="text-sm space-y-1">
+                    {result.improvementSuggestions.map((suggestion, i) => (
+                      <div key={i} className="text-primary-foreground bg-primary/10 rounded px-2 py-1 flex items-start">
+                        <ArrowUp className="h-3 w-3 mr-1 mt-0.5 text-primary" />
+                        <span>{suggestion}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
         </CardContent>
       )}
     </Card>

@@ -1,61 +1,103 @@
 
-import { StudentMarks, CourseRequirement, EligibilityResult, SubjectMark } from './types';
+import { 
+  StudentMarks, 
+  CourseRequirement, 
+  EligibilityResult, 
+  SubjectMark, 
+  SubjectType,
+  SubjectRequirement,
+  classifySubject
+} from './types';
 
 /**
  * Calculate APS score based on subject marks
  * Different universities use different scales for APS calculation
  */
 export const calculateAps = (marks: StudentMarks, universitySystem: 'UJ' | 'UP' | 'WITS' = 'UJ'): number => {
+  // Process and classify subjects
+  const processedSubjects = marks.subjects.map(subject => ({
+    ...subject,
+    type: subject.type || classifySubject(subject.name)
+  }));
+  
   // Sort subjects by percentage (highest first) to consider only the best subjects if needed
-  const sortedSubjects = [...marks.subjects].sort((a, b) => b.percentage - a.percentage);
+  const sortedSubjects = [...processedSubjects].sort((a, b) => b.percentage - a.percentage);
   
   // Get APS points for each subject based on university system
   const apsPoints = sortedSubjects.map(subject => {
     const percentage = subject.percentage;
+    const subjectType = subject.type;
+    
+    // Apply subject-specific caps (e.g., Math Literacy gets max 5 points in some systems)
+    let points = 0;
     
     // UJ uses an 8-point scale (90%+ = 8 points)
     if (universitySystem === 'UJ') {
-      if (percentage >= 90) return 8;
-      if (percentage >= 80) return 7;
-      if (percentage >= 70) return 6;
-      if (percentage >= 60) return 5;
-      if (percentage >= 50) return 4;
-      if (percentage >= 40) return 3;
-      if (percentage >= 30) return 2;
-      return 1;
+      if (percentage >= 90) points = 8;
+      else if (percentage >= 80) points = 7;
+      else if (percentage >= 70) points = 6;
+      else if (percentage >= 60) points = 5;
+      else if (percentage >= 50) points = 4;
+      else if (percentage >= 40) points = 3;
+      else if (percentage >= 30) points = 2;
+      else points = 1;
+      
+      // Subject-specific caps for UJ
+      if (subjectType === SubjectType.MATH_LIT) {
+        points = Math.min(points, 6); // Cap Mathematical Literacy at 6 points
+      }
     }
     
     // UP uses a 7-point scale (80%+ = 7 points)
-    if (universitySystem === 'UP') {
-      if (percentage >= 80) return 7;
-      if (percentage >= 70) return 6;
-      if (percentage >= 60) return 5;
-      if (percentage >= 50) return 4;
-      if (percentage >= 40) return 3;
-      if (percentage >= 30) return 2;
-      return 1;
+    else if (universitySystem === 'UP') {
+      if (percentage >= 80) points = 7;
+      else if (percentage >= 70) points = 6;
+      else if (percentage >= 60) points = 5;
+      else if (percentage >= 50) points = 4;
+      else if (percentage >= 40) points = 3;
+      else if (percentage >= 30) points = 2;
+      else points = 1;
+      
+      // Subject-specific caps for UP
+      if (subjectType === SubjectType.MATH_LIT) {
+        points = Math.min(points, 5); // Cap Mathematical Literacy at 5 points
+      }
     }
     
     // WITS uses a 9-point scale with different boundaries
-    if (universitySystem === 'WITS') {
-      if (percentage >= 90) return 9;
-      if (percentage >= 80) return 8;
-      if (percentage >= 70) return 7;
-      if (percentage >= 60) return 6;
-      if (percentage >= 50) return 5;
-      if (percentage >= 40) return 4;
-      if (percentage >= 30) return 3;
-      if (percentage >= 20) return 2;
-      return 1;
+    else if (universitySystem === 'WITS') {
+      if (percentage >= 90) points = 9;
+      else if (percentage >= 80) points = 8;
+      else if (percentage >= 70) points = 7;
+      else if (percentage >= 60) points = 6;
+      else if (percentage >= 50) points = 5;
+      else if (percentage >= 40) points = 4;
+      else if (percentage >= 30) points = 3;
+      else if (percentage >= 20) points = 2;
+      else points = 1;
+      
+      // Subject-specific caps for WITS
+      if (subjectType === SubjectType.MATH_LIT) {
+        points = Math.min(points, 6); // Cap Mathematical Literacy at 6 points
+      }
     }
     
-    return 0;
+    return { subject: subject.name, points, percentage, type: subjectType };
   });
   
   // Most universities consider the best 6 or 7 subjects
-  // We'll take the best 6 subjects by default
+  // We'll take the best 6 subjects by default, excluding Life Orientation
   const topSubjectsCount = universitySystem === 'WITS' ? 7 : 6;
-  let totalAps = apsPoints.slice(0, topSubjectsCount).reduce((sum, points) => sum + points, 0);
+  
+  // Filter out Life Orientation as it's typically not counted for APS
+  const filteredPoints = apsPoints.filter(
+    subject => !subject.subject.includes('Life Orientation')
+  );
+  
+  // Take the best N subjects for APS calculation
+  let totalAps = filteredPoints
+    .slice(0, topSubjectsCount)
+    .reduce((sum, subject) => sum + subject.points, 0);
   
   // Apply quintile adjustment for disadvantaged schools (quintiles 1-3)
   if (marks.schoolQuintile && marks.schoolQuintile <= 3) {
@@ -67,26 +109,77 @@ export const calculateAps = (marks: StudentMarks, universitySystem: 'UJ' | 'UP' 
 
 /**
  * Check if a student meets the subject requirements for a course
+ * With enhanced support for conditional requirements
  */
 const meetsSubjectRequirements = (
   marks: StudentMarks, 
   courseRequirements: CourseRequirement
-): {meets: boolean; missing: string[]} => {
+): {meets: boolean; missing: string[]; suggestions: string[]} => {
   const missing: string[] = [];
+  const suggestions: string[] = [];
+  
+  // Process and classify subjects
+  const processedSubjects = marks.subjects.map(subject => ({
+    ...subject,
+    type: subject.type || classifySubject(subject.name)
+  }));
   
   // Check each required subject
   for (const req of courseRequirements.requiredSubjects) {
-    const subject = marks.subjects.find(s => s.name.toLowerCase() === req.name.toLowerCase());
+    // Check main requirement
+    const mainSubject = processedSubjects.find(s => 
+      s.name.toLowerCase() === req.name.toLowerCase() || 
+      (req.type && s.type === req.type)
+    );
     
-    // If subject not found or below required percentage
-    if (!subject || subject.percentage < req.minimumPercentage) {
-      missing.push(
-        `${req.name} (Required: ${req.minimumPercentage}%${subject ? `, Got: ${subject.percentage}%` : ', Not taken'})`
-      );
+    let requirementMet = false;
+    
+    // Check main subject requirement
+    if (mainSubject && mainSubject.percentage >= req.minimumPercentage) {
+      requirementMet = true;
+    } 
+    // Check alternative requirements if main is not met
+    else if (req.alternatives && req.alternatives.length > 0) {
+      for (const alt of req.alternatives) {
+        const altSubject = processedSubjects.find(s => 
+          s.name.toLowerCase() === alt.name.toLowerCase() || 
+          (alt.type && s.type === alt.type)
+        );
+        
+        if (altSubject && altSubject.percentage >= alt.minimumPercentage) {
+          requirementMet = true;
+          break;
+        }
+      }
+    }
+    
+    // If requirement not met, add to missing list
+    if (!requirementMet) {
+      let missingReq = `${req.name} (Required: ${req.minimumPercentage}%`;
+      
+      if (mainSubject) {
+        missingReq += `, Got: ${mainSubject.percentage}%`;
+        
+        // Add improvement suggestion
+        const deficit = req.minimumPercentage - mainSubject.percentage;
+        suggestions.push(`Improve ${req.name} by ${deficit}% to meet the requirement`);
+      } else {
+        missingReq += ', Not taken';
+        suggestions.push(`Consider taking ${req.name} to qualify`);
+      }
+      
+      // Add alternative options to the requirement display
+      if (req.alternatives && req.alternatives.length > 0) {
+        const altTexts = req.alternatives.map(alt => `${alt.name} (${alt.minimumPercentage}%)`);
+        missingReq += ` OR ${altTexts.join(' OR ')}`;
+      }
+      
+      missingReq += ')';
+      missing.push(missingReq);
     }
   }
   
-  return { meets: missing.length === 0, missing };
+  return { meets: missing.length === 0, missing, suggestions };
 };
 
 /**
@@ -113,6 +206,7 @@ export const getEligibleCourses = (
       eligible: meetsAps && subjectRequirements.meets,
       extendedProgram: eligibleForExtended && subjectRequirements.meets,
       missingRequirements: subjectRequirements.missing,
+      improvementSuggestions: subjectRequirements.suggestions
     });
   }
   
@@ -132,7 +226,7 @@ export const getExtendedProgramCourses = (
 };
 
 /**
- * Generate sample course data for testing
+ * Generate sample course data with enhanced conditional requirements
  */
 export const sampleCourseRequirements: CourseRequirement[] = [
   {
@@ -141,8 +235,22 @@ export const sampleCourseRequirements: CourseRequirement[] = [
     minAps: 32,
     extendedProgramMinAps: 28,
     requiredSubjects: [
-      { name: "Mathematics", minimumPercentage: 60 },
-      { name: "English", minimumPercentage: 50 }
+      { 
+        name: "Mathematics", 
+        minimumPercentage: 60,
+        type: SubjectType.MATH_PURE,
+        alternatives: [
+          { name: "Technical Mathematics", minimumPercentage: 70, type: SubjectType.MATH_TECH }
+        ]
+      },
+      { 
+        name: "English Home Language", 
+        minimumPercentage: 50,
+        type: SubjectType.LANG_HL,
+        alternatives: [
+          { name: "English First Additional Language", minimumPercentage: 60, type: SubjectType.LANG_FAL }
+        ]
+      }
     ]
   },
   {
@@ -151,9 +259,27 @@ export const sampleCourseRequirements: CourseRequirement[] = [
     minAps: 36,
     extendedProgramMinAps: 32,
     requiredSubjects: [
-      { name: "Mathematics", minimumPercentage: 70 },
-      { name: "Physical Science", minimumPercentage: 60 },
-      { name: "English", minimumPercentage: 50 }
+      { 
+        name: "Mathematics", 
+        minimumPercentage: 70,
+        type: SubjectType.MATH_PURE
+      },
+      { 
+        name: "Physical Sciences", 
+        minimumPercentage: 60,
+        type: SubjectType.PHYS_SCI,
+        alternatives: [
+          { name: "Technical Sciences", minimumPercentage: 65, type: SubjectType.TECH_SCI }
+        ]
+      },
+      { 
+        name: "English Home Language", 
+        minimumPercentage: 50,
+        type: SubjectType.LANG_HL,
+        alternatives: [
+          { name: "English First Additional Language", minimumPercentage: 60, type: SubjectType.LANG_FAL }
+        ]
+      }
     ]
   },
   {
@@ -162,8 +288,22 @@ export const sampleCourseRequirements: CourseRequirement[] = [
     minAps: 34,
     extendedProgramMinAps: 30,
     requiredSubjects: [
-      { name: "Mathematics", minimumPercentage: 60 },
-      { name: "English", minimumPercentage: 60 }
+      { 
+        name: "Mathematics", 
+        minimumPercentage: 60,
+        type: SubjectType.MATH_PURE,
+        alternatives: [
+          { name: "Mathematical Literacy", minimumPercentage: 80, type: SubjectType.MATH_LIT }
+        ]
+      },
+      { 
+        name: "English Home Language", 
+        minimumPercentage: 60,
+        type: SubjectType.LANG_HL,
+        alternatives: [
+          { name: "English First Additional Language", minimumPercentage: 70, type: SubjectType.LANG_FAL }
+        ]
+      }
     ]
   },
   {
@@ -172,7 +312,14 @@ export const sampleCourseRequirements: CourseRequirement[] = [
     minAps: 30,
     extendedProgramMinAps: 28,
     requiredSubjects: [
-      { name: "English", minimumPercentage: 60 }
+      { 
+        name: "English Home Language", 
+        minimumPercentage: 60,
+        type: SubjectType.LANG_HL,
+        alternatives: [
+          { name: "English First Additional Language", minimumPercentage: 70, type: SubjectType.LANG_FAL }
+        ]
+      }
     ]
   },
   {
@@ -180,10 +327,29 @@ export const sampleCourseRequirements: CourseRequirement[] = [
     faculty: "Health Sciences",
     minAps: 40,
     requiredSubjects: [
-      { name: "Mathematics", minimumPercentage: 80 },
-      { name: "Physical Science", minimumPercentage: 70 },
-      { name: "Life Science", minimumPercentage: 70 },
-      { name: "English", minimumPercentage: 60 }
+      { 
+        name: "Mathematics", 
+        minimumPercentage: 80,
+        type: SubjectType.MATH_PURE
+      },
+      { 
+        name: "Physical Sciences", 
+        minimumPercentage: 70,
+        type: SubjectType.PHYS_SCI 
+      },
+      { 
+        name: "Life Sciences", 
+        minimumPercentage: 70,
+        type: SubjectType.LIFE_SCI
+      },
+      { 
+        name: "English Home Language", 
+        minimumPercentage: 60,
+        type: SubjectType.LANG_HL,
+        alternatives: [
+          { name: "English First Additional Language", minimumPercentage: 70, type: SubjectType.LANG_FAL }
+        ]
+      }
     ]
   }
 ];
