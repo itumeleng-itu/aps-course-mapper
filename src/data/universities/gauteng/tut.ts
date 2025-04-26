@@ -118,7 +118,7 @@ export const tut: University = {
     {
       degree: "Higher Certificate in Music",
       faculty: "Arts and Design",
-      duration: 3,
+      duration: 1,
       apsMin: 18,
       subjectRequirements: [
         { subject: "English", level: 3 }
@@ -132,7 +132,7 @@ export const tut: University = {
       apsMin: 22,
       subjectRequirements: [
         { subject: "English", level: 4 },
-        { subject: "Accounting", level: 5 },
+        { subject: "Accounting", level: 3 },
         { subject: "Mathematics/Technical Mathematics", level: 3 },
         { subject: "Mathematical Literacy", level: 5 }
       ]
@@ -193,7 +193,7 @@ export const tut: University = {
         { subject: "English", level: 4 },
         { subject: "Accounting", level: 4 },
         { subject: "Mathematics/Technical Mathematics", level: 3 },
-        { subject: "Mathematical Literacy", level: 5 }
+        { subject: "Mathematical Literacy", level: 4 }
       ]
     },
     {
