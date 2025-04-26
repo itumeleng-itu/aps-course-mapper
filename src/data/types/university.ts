@@ -1,3 +1,4 @@
+import { Key } from "react";
 
 export interface Course {
   degree: string;
@@ -11,6 +12,7 @@ export interface Course {
 }
 
 export interface University {
+  id: Key;
   name: string;
   courses: Course[];
 }

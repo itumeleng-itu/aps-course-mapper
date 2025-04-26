@@ -1,13 +1,14 @@
-
+import { useState } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { Info } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import universities from "@/data/universities/universities"; // Import universities
 
 interface UniversitySelectorProps {
-  universitySystem: 'UJ' | 'UP' | 'WITS';
+  universitySystem: string; // Updated to accept dynamic university IDs
   schoolQuintile?: number;
-  onUniversityChange: (value: 'UJ' | 'UP' | 'WITS') => void;
+  onUniversityChange: (value: string) => void;
   onQuintileChange: (value: number | undefined) => void;
 }
 
@@ -17,21 +18,28 @@ const UniversitySelector = ({
   onUniversityChange,
   onQuintileChange,
 }: UniversitySelectorProps) => {
+  const [selectedUniversity, setSelectedUniversity] = useState<string>(universitySystem);
+
   return (
     <div className="grid grid-cols-2 gap-4 mb-4">
       <div>
         <Label htmlFor="university-system">University System</Label>
         <Select 
-          value={universitySystem} 
-          onValueChange={(value) => onUniversityChange(value as 'UJ' | 'UP' | 'WITS')}
+          value={selectedUniversity} 
+          onValueChange={(value) => {
+            setSelectedUniversity(value);
+            onUniversityChange(value);
+          }}
         >
           <SelectTrigger id="university-system">
             <SelectValue placeholder="Select university" />
           </SelectTrigger>
           <SelectContent position="popper">
-            <SelectItem value="UJ">University of Johannesburg (UJ)</SelectItem>
-            <SelectItem value="UP">University of Pretoria (UP)</SelectItem>
-            <SelectItem value="WITS">University of Witwatersrand (WITS)</SelectItem>
+            {universities.map((university) => (
+              <SelectItem key={university.id} value={university.id.toString()}>
+                {university.id.toString()} ({university.courses.join(", ")})
+              </SelectItem>
+            ))}
           </SelectContent>
         </Select>
       </div>
